@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="text-center mb-5">Точки входа</h2>
+                    <form asp-action="login" method="post">
+                        <div class="d-flex justify-content-between">
+                            <button type="submit" name="user" value="admin" class="btn btn-secondary">Админ</button>
+                            <button type="submit" name="user" value="user" class="btn btn-secondary">Пользователь</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

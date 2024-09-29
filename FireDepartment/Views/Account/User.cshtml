@@ -1,0 +1,34 @@
+﻿﻿@{
+    ViewData["Title"] = "User";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <ul class="list-group link-list">
+                <li class="list-group-item">
+                    <a asp-controller="Sotrudniki" asp-action="Index">Сотрудники</a>
+                </li>
+                <li class="list-group-item">
+                    <a asp-controller="Call" asp-action="Index">Вызовы</a>
+                </li>
+                <li class="list-group-item">
+                    <a asp-controller="Oborudovaniye" asp-action="Index">Оборудования</a>
+                </li>
+                <li class="list-group-item">
+                    <a asp-controller="PreventionEvent" asp-action="Index">Мероприятия по профилактике</a>
+                </li>
+                <li class="list-group-item">
+                    <a asp-controller="Inventory" asp-action="Index">Инвентаризация оборудования</a>
+                </li>
+                @if (this.Context.User.IsInRole("admin"))
+                {
+                    <li class="list-group-item">
+                        <a asp-controller="CallOborudovaniye" asp-action="Index">Связь Вызов-Оборудование</a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>

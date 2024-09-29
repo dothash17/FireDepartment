@@ -1,0 +1,83 @@
+﻿@model IEnumerable<FireDepartment.Models.Call>
+@using Microsoft.AspNetCore.Http.Extensions
+
+@{
+    ViewData["Title"] = "Index";
+    var queryString = ViewContext.HttpContext.Request.Query;
+    var categoryFilter = queryString["categoryFilter"].ToString();
+}
+
+<h1>Список вызовов</h1>
+
+@if (this.Context.User.IsInRole("admin"))
+{
+    <p>
+        <a class="btn btn-primary" asp-action="Create">Добавить вызов</a>
+    </p>
+}
+
+<form asp-action="Search" method="post">
+    <div class="mb-2 form-group narrow-form">
+        <label for="categoryFilter">Фильтр по категории:</label>
+        <select class="form-control" name="categoryFilter" id="categoryFilter">
+            <option value="">Все категории</option>
+            <option value="Пожар">Пожар</option>
+            <option value="Утечка газа">Утечка газа</option>
+            <option value="Спасение людей">Спасение людей</option>
+        </select>
+    </div>
+    <button type="submit" class="mb-2 btn btn-primary">Поиск</button>
+    <a href="@Url.Action("Index")" class="mb-2 btn btn-secondary">Сбросить</a>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DateTimeCall)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Location)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sotrudnik.Id)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateTimeCall)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sotrudnik.Id)
+            </td>
+            <td>
+                    <a class="btn btn-primary btn-sm" asp-action="Details" asp-route-id="@item.Id">Подробнее</a>
+                    @if (this.Context.User.IsInRole("admin"))
+                    {
+                        <a class="btn btn-success btn-sm" asp-action="Edit" asp-route-id="@item.Id">Редактировать</a>
+                        <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
+                    }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

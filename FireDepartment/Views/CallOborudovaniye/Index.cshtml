@@ -1,0 +1,51 @@
+﻿@model IEnumerable<FireDepartment.Models.CallOborudovaniye>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Связи Вызов-Оборудование</h1>
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">Добавить связь</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Call.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Call.Location)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Oborudovaniye.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Oborudovaniye.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Call.Id)
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Call.Location)
+            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Oborudovaniye.Id)
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Oborudovaniye.Name)
+            </td>
+            <td>
+                    <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-studentId="@item.CallId" asp-route-performanceId="@item.OborudovaniyeId">Удалить</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
