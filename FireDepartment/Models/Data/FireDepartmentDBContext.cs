@@ -44,7 +44,7 @@ public partial class FireDepartmentDBContext : DbContext
 
             entity.HasOne(d => d.Sotrudnik).WithMany(p => p.Calls)
                 .HasForeignKey(d => d.SotrudnikId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_Call_Sotrudniki");
         });
 
@@ -61,12 +61,12 @@ public partial class FireDepartmentDBContext : DbContext
 
             entity.HasOne(d => d.Call).WithMany(p => p.CallOborudovaniye)
                 .HasForeignKey(d => d.CallId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_CallOborudovaniye_Call");
 
             entity.HasOne(d => d.Oborudovaniye).WithMany(p => p.CallOborudovaniye)
                 .HasForeignKey(d => d.OborudovaniyeId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_CallOborudovaniye_Oborudovaniye");
         });
 
@@ -82,7 +82,7 @@ public partial class FireDepartmentDBContext : DbContext
 
             entity.HasOne(d => d.Oborudovaniye).WithMany(p => p.Inventory)
                 .HasForeignKey(d => d.OborudovaniyeId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_Inventory_Oborudovaniye");
         });
 
@@ -113,7 +113,7 @@ public partial class FireDepartmentDBContext : DbContext
 
             entity.HasOne(d => d.Sotrudnik).WithMany(p => p.PreventionEvents)
                 .HasForeignKey(d => d.SotrudnikId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_PreventionEvent_Sotrudniki");
         });
 
